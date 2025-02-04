@@ -5,16 +5,20 @@ import { icons } from "../../constants";// Переконайся, що у const
 
 const TabIcon = ({ icon, color, name, focused }) => {
   return (
-    <View className='items-center justify-center gap-1'>
+    <View className='items-center justify-center gap-1 pt-4'>
       <Image
         source={icon}
         resizeMode="contain"
         tintColor={color}
         className="w-6 h-6"
       />
-      <Text className={`${focused ? 'font-psemibold' : 'font-pregular'} text-xs`} style={{color : focused ? "#FF9C01" : "#CDCDE0"}}>
-        {name}
-      </Text>
+      <Text
+  className={focused ? "font-psemibold" && "text-xs" : "font-pregular" && "text-xs"}
+  style={{ color: focused ? "#FF9C01" : "#CDCDE0" }}
+>
+  {name}
+</Text>
+
     </View>
   );
 };
@@ -22,6 +26,8 @@ const TabIcon = ({ icon, color, name, focused }) => {
 const TabsLayout = () => {
   return (
     <Tabs
+     
+        className='mt-4'
         screenOptions={{
             tabBarShowLabel : false,
             tabBarActiveTintColor : "#FF9C01",
@@ -31,7 +37,9 @@ const TabsLayout = () => {
                 borderTopWidth : 1,
                 borderTopColor : "#232533"
             }
-        }} 
+          
+        }}
+        
     >
         <Tabs.Screen
         name="home"
@@ -51,13 +59,13 @@ const TabsLayout = () => {
           <Tabs.Screen
         name="bookmark"
         options={{
-          title: "Bookemark",
+          title: "Bookmark",
           headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabIcon
              icon={icons.bookmark} 
              color={color} 
-             name="BookMark" 
+             name="Saved" 
              focused={focused} 
             />
           ),
