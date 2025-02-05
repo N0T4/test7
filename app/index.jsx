@@ -39,7 +39,7 @@ const index = () => {
               </Text>
               <CustomButton 
                 title='Continue with Email'
-                handlePres={() => router.push('/sing-in.jsx')}
+                handlePres={() => router.push('/sing-in')}
                 containerStyles='w-full mt-7'
               />
             </View>
