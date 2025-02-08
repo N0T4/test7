@@ -19,7 +19,7 @@ const SingIn = () => {
   return (
     <SafeAreaView className='bg-primary h-full'>
       <ScrollView>
-        <View className='h-[85vh] w-full justify-center px-4 my-6'>
+        <View className='h-[83vh] w-full justify-center px-4 my-6'>
           <Image 
             source={images.logo} 
             resizeMethod='contain'
@@ -39,7 +39,7 @@ const SingIn = () => {
           <FormField 
             title='Password'
             value={form.password}
-            handleChangeText={(e) => setform({ ...form, email: e })}
+            handleChangeText={(e) => setform({ ...form, password: e })}
             otherStyle='mt-7'
             keyboardType='password'
           />
@@ -53,7 +53,7 @@ const SingIn = () => {
               <Text className='text-gray-100 text-lg font-pregular'>
               Don’t have an account?
               </Text>
-              <Link href='/sign-up' className='text-secondary-100 text-lg font-pregular'>Sign up</Link>
+              <Link href='/sing-up' className='text-secondary-100 text-lg font-pregular'>Sign up</Link>
           </View>
         </View>
       </ScrollView>
