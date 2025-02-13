@@ -6,6 +6,9 @@ import CustomButton from '../../components/CustomButton'
 import { Link } from 'expo-router'
 import { createUser } from '../../lib/appwrite'
 
+
+
+
 const SignUp = () => {
   const [form, setForm] = useState({
     username: '',
@@ -55,7 +58,7 @@ const SignUp = () => {
 
           <CustomButton
             title="Sign up"
-            handlePress={submit}  // ✅ Fix spelling
+            handlePress={submit}  
             containerStyles="mt-7"
             isLoading={isSubmitting}
           />
@@ -64,7 +67,7 @@ const SignUp = () => {
             <Text className="text-gray-100 text-lg font-pregular">
               Already have an account?
             </Text>
-            <Link href="/sing-in" className="text-secondary-100 text-lg font-pregular">Login</Link>
+            <Link href="/sign-in" className="text-secondary-100 text-lg font-pregular">Login</Link>
           </View>
         </View>
       </ScrollView>

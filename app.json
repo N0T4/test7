@@ -14,14 +14,13 @@
     },
     "ios": {
       "supportsTablet": true,
-      "package": "com.329.aora",
       "bundleIdentifier": "com.329.aora"
     },
     "android": {
+      "package": "com.329.aora",
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.329.aora"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
