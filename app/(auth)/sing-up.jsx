@@ -1,26 +1,39 @@
-import { View, Text, SafeAreaView, ScrollView, Image } from 'react-native'
-import React, { useState } from 'react'
-import { images } from '../../constants'
-import FormField from '../../components/FormField'
-import CustomButton from '../../components/CustomButton'
-import { Link } from 'expo-router'
-import { createUser } from '../../lib/appwrite'
-
-
-
+import { View, Text, SafeAreaView, ScrollView, Image, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { images } from '../../constants';
+import FormField from '../../components/FormField';
+import CustomButton from '../../components/CustomButton';
+import { Link, router } from 'expo-router';
+import { createUser } from '../../lib/appwrite';
 
 const SignUp = () => {
   const [form, setForm] = useState({
     username: '',
     email: '',
     password: ''
-  })
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {
-    createUser();
-  }
+  const submit = async () => {
+    if (!form.username || !form.email || !form.password) {
+      Alert.alert("Error", "Please fill all the fields");
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const result = await createUser(form.email, form.password, form.username);
+
+      // Redirect to home after successful sign-up
+      router.replace('/home');
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -67,12 +80,12 @@ const SignUp = () => {
             <Text className="text-gray-100 text-lg font-pregular">
               Already have an account?
             </Text>
-            <Link href="/sign-in" className="text-secondary-100 text-lg font-pregular">Login</Link>
+            <Link href="/sing-in" className="text-secondary-100 text-lg font-pregular">Login</Link>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
