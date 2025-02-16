@@ -28,7 +28,7 @@ const _layout = () => {
       if(!fontsLoaded && !error) return null;
   return (
     <GlobalProvider>
-    <Stack>
+    <Stack  screenOptions={{ headerShown: false }} >
         <Stack.Screen name='index' options={{headerShown : false}} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         {/* <Stack.Screen name="/search/[query]" options={{ headerShown: false }} /> */}

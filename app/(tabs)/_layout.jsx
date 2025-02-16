@@ -27,7 +27,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
 const TabsLayout = () => {
   return (
     <Tabs
-     
+        
         className='mt-4'
         screenOptions={{
             tabBarShowLabel : false,
