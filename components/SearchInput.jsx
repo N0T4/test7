@@ -14,7 +14,7 @@ const SearchInput = ({ title, value, placeholder, handleChangeText, otherStyle ,
                 <TextInput
                     className="text-base mt-0.5 text-white flex-1 font-pregular"
                     value={value}
-                    placeholder={placeholder}
+                    placeholder="Search for a video topic"
                     placeholderTextColor="#7b7b8b"
                     onChangeText={handleChangeText} // Виправлено `handelChangeText`
                     secureTextEntry={title === 'Password' && !showPassword}
