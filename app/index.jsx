@@ -9,14 +9,16 @@ import { useGlobalContext } from '../context/GlobalProvider';
 export default function App() {
     const { isLoading, isLoggedIn } = useGlobalContext();
 
-    // Redirect to home if the user is already logged in
+    // ✅ Додаємо логіку очікування, щоб уникнути зайвих рендерів
     useEffect(() => {
-        if (!isLoading && isLoggedIn) {
-            router.replace('/home');
+        if (isLoading) return;
+        if (isLoggedIn) {
+            router.replace('/home'); // ✅ Перенаправляємо тільки після перевірки
         }
     }, [isLoading, isLoggedIn]);
 
-    if (isLoading) {
+    // ✅ Показуємо завантаження, поки перевіряється сесія
+    if (isLoading || isLoggedIn === null) {
         return (
             <SafeAreaView className="bg-primary h-full flex justify-center items-center">
                 <ActivityIndicator size="large" color="#ffffff" />
@@ -58,7 +60,7 @@ export default function App() {
 
                     <CustomButton 
                         title="Continue with Email"
-                        handlePress={() => router.push('/sing-in')} // ✅ Fixed typo
+                        handlePress={() => router.push('/sing-in')} 
                         containerStyles="w-full mt-7"
                     />
                 </View>

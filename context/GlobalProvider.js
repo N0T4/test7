@@ -1,7 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getCurrentUser } from "../lib/appwrite";
 
 const GlobalContext = createContext();
+
+
 
 export const useGlobalContext = () => useContext(GlobalContext);
 
@@ -11,23 +14,33 @@ const GlobalProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        setIsLoading(true); // Перенесено сюди, щоб відразу показати завантаження
-        getCurrentUser()
-            .then((res) => {
-                if (res) {
-                    setUser(res);
-                    setIsLoggedIn(true); // ✅ Додаємо зміну статусу
+        const loadUser = async () => {
+            setIsLoading(true);
+            try {
+
+                const savedUser = await AsyncStorage.getItem("user");
+
+                if (savedUser) {
+                    setUser(JSON.parse(savedUser));
+                    setIsLoggedIn(true);
                 } else {
-                    setIsLoggedIn(false);
-                    setUser(null);
+                    const fetchedUser = await getCurrentUser();
+    
+                    if (fetchedUser) {
+                        setUser(fetchedUser);
+                        setIsLoggedIn(true);
+                        await AsyncStorage.setItem("user", JSON.stringify(fetchedUser));
+                    } else {
+                        setIsLoggedIn(false);
+                    }
                 }
-            })
-            .catch((error) => {
-                console.error("Error fetching user:", error);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+            } catch (error) {
+                console.error("🔴 Помилка завантаження користувача:", error);
+            }
+            setIsLoading(false);
+        };
+    
+        loadUser();
     }, []);
 
     return (
