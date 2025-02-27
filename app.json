@@ -27,11 +27,7 @@
     },
     "plugins": [
       "expo-router",
-      "expo-video",
-        {
-          "supportsBackgroundPlayback": true,
-          "supportsPictureInPicture": true
-        }
+      "expo-video"
     ]
   }
 }
